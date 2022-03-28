@@ -4,8 +4,6 @@ from .serializers import UserSerializer
 from rest_framework.decorators import api_view
 
 
-
-
 @api_view(['POST'])
 def users(request):
     """
@@ -15,8 +13,6 @@ def users(request):
     """
     try:
         username = request.data.get('username', None)
-
-        users = []
 
         if username:
             user_data = User.objects.all().order_by('-score')
@@ -50,7 +46,7 @@ def users(request):
 @api_view(['POST'])
 def create_user(request):
     """
-    Create user based on username, score and room (if provided)
+    Create user based on username, score
     :param request:
     :return:
     """
@@ -59,7 +55,7 @@ def create_user(request):
         username = request.data.get('username', None)
 
         score = request.data.get('score', 0.0)
-        print("score",score)
+        print("score", score)
         user = User.objects.filter(name=username).first()
 
         if user:
